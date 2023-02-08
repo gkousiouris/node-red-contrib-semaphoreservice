@@ -16,7 +16,7 @@ This is a subflow to create a semaphore service to act as a distributed lock/syn
 
 The subflow defines 5 endpoints:
  * `POST /semaphore` for new semaphore creation. The body should contain name and initialization value of the created semaphore: `{"name":"<semname>","value":1}`. The value needs to be a positive integer. If not positive, a `400 HTTP error code` is returned. A positive float will be converted to integer. If the semaphore already exists, a `303 HTTP error code`  is returned. 
- * `DELETE /semaphore:name` needs to have only the name parameter in the call. If the semaphore does not exist a `404 HTTP error code`  is returned
+ * `DELETE /semaphore/:name` needs to have only the name parameter in the call. If the semaphore does not exist a `404 HTTP error code`  is returned
  * `GET /semaphore/value/:name` for retrieving the current value. If the semaphore does not exist a `404 HTTP error code`  is returned
  * `POST /semaphore/up` for increasing the value by 1 with a body of the semaphore name `{"name":"<semname>"}` . If the semaphore does not exist a `404 HTTP error code`  is returned.
  * `POST /semaphore/down` for decreasing the value by 1 with a body of the semaphore name `{"name":"<semname>"}`. If the semaphore is already at 0,a relevant message `Semaphore locked` with a `409 HTTP error code`  is returned. If the semaphore does not exist a `404 HTTP error code`  is returned.
